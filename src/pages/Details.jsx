@@ -1,11 +1,10 @@
 import React from 'react'
 import { MovieDetails, MySwiper } from '../components'
 
-const Details = () => {
+const Details = ({singleData}) => {
   return <>  
-<MovieDetails/>
-{/* <Comments/> */}
-<MySwiper/>
+    <MovieDetails singleData={singleData}/>
+    <MySwiper/>
   </>
 }
 

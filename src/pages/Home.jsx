@@ -1,11 +1,10 @@
 import React from 'react'
 import { MoviesShow, MyCarousel } from '../components'
 
-const Home = () => {
+const Home = ({setsingleData}) => {
   return <>
   <MyCarousel/>
-  <MoviesShow/>
- 
+  <MoviesShow setsingleData={setsingleData}/>
   </>
 }
 

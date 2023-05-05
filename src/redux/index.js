@@ -1,10 +1,10 @@
 import { applyMiddleware, combineReducers, createStore } from "redux"
 import { composeWithDevTools } from "redux-devtools-extension"
 import thunk from "redux-thunk"
-// import { AddShopDetails } from "./reducers/shopReducers"
+import { movies } from "./reducer/movieReducer"
 
 const rootReducer = combineReducers({
-    // allShopList: AddShopDetails
+    allMovie: movies
 })
 const store = createStore(
     rootReducer,

@@ -1,48 +1,45 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { movieListShow } from '../redux/action/movieAction'
 import "./../assets/css/Home.css"
 
 
-const MoviesShow = () => {
-  return <>
-  
-  <div class="row">
-    <Link to="/details" className='dark-link'>
+const MoviesShow = ({setsingleData}) => {
 
-    <div class="col-3 poster">
+  const actionDispatch = useDispatch()
+  const navigate = useNavigate()
+  const {movieList} = useSelector(state => state.allMovie)
+
+  const handleshowDetails = (item) => {
+    setsingleData(item)
+    navigate(`details/${item?.show?.id}`)
+  }
+
+  useEffect(() => {
+    actionDispatch(movieListShow())
+  }, [])
+
+  return <>
+        <div class="row">
+{
+  movieList &&  movieList.map(item => <>
+      <div class="col-md-4 col-sm-6  poster" onClick={e => handleshowDetails(item)}>
   <div class="card adjust">
-    <img src="https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/tu-jhoothi-main-makkaar-et00347237-1675065103.jpg" class="card-img-top" className='adjust' alt="..."/>
-    <div class="card-footer">
-      <small class="text-muted">Last updated 3 mins ago</small>
+    <img src={item.show.image?.original} class="card-img-top" className='adjust img-fluid' alt={item.show.image?.original}/>
+    <div class="card-footers">
+      <small class="text-muted"><i class="bi b-colour bi-star-fill"></i> {item.show.rating.average}</small>
+    </div>
+    <div className='card-below'>
+      <h5 className='bold'>{item.show.name}</h5>
+      <p>{item.show.genres[0]}  {item.show.genres[1]}</p>
     </div>
   </div>
-        </div>
-        </Link>
-
-
-
-
-<div className="pages">
-
-      <nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+        </div> 
+ </>
+  )
+}
   </div>
-</div>
   </>
 }
 

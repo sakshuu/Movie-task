@@ -1,6 +1,6 @@
 import React from 'react'
 import "./../assets/css/Home.css"
-import Bolly from "./../assets/images/Bolly.png";
+import Movie from "./../assets/images/Movie.png";
 
 const Footer = () => {
   return <>
@@ -11,7 +11,7 @@ const Footer = () => {
 </div>
 <div className='footer-logo'>
 
-<img  src={Bolly} alt="" />
+<img  src={Movie} alt="" />
 </div>
   </div>
   </>

@@ -1,10 +1,13 @@
-import React from 'react'
-import  "./../assets/css/details.css";
-import film from "./../assets/images/film.png";
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import film from "./../assets/images/film.png";
+import  "./../assets/css/details.css";
 
-const MovieDetails = () => {
+const MovieDetails = ({singleData}) => {
     const naviagte = useNavigate()
+    useEffect(() => {
+    }, [singleData])
+    
     const myStyle={
         backgroundImage: 
         `url(${film})`,
@@ -14,39 +17,48 @@ const MovieDetails = () => {
         backgroundRepeat: 'no-repeat',
     };
   return <>
+  {/* <pre>{JSON.stringify(singleData,null,2)}</pre> */}
    <div style={myStyle} className='main'>
 <div className='container middle'>
 <div className='row moviedetails'>
 
-    <div className='left-side col-6'>
+
+    <div className='left-side col-sm-4 col-md-6 '>
     <div className='card img-card'   style={{width: "16rem"}}  >
-<img src="https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/tu-jhoothi-main-makkaar-et00347237-1675065103.jpg" />
-{/* <button class="centered btn btn-sm btn-outline-dark" ><i class="bi bi-play-fill"></i>Triller</button> */}
+<img src={singleData.show.image?.original} />
     <p class="cinemas-footer">In cinemas</p>
 </div> 
     </div>
 
-    <div className='right-side col-6'>
-        <h2 className='file-name'>Tu Jhoothi Main Makkaar</h2>
-        <div className='d-flex gap-3'>
+    <div className='right-side col-sm-4 col-md-6'>
+        <h2 className='file-name'>{singleData.show.name}</h2>
+        <div className='d-flex gap-3 mb-4'>
 
-        <p className='language-d'>2D</p>
-        <p className='language'>
-Hindi, Marathi, English
-        </p>
+        <span class="badge rounded-pill bg-secondary">{singleData.show.status}</span>
+        <a href={singleData.show.officialSite}>
+        <span class="badge rounded-pill bg-success">visit site official  </span>
+             </a>
         </div>
         <ul className='bullet'>
-            <li>2h 39min</li>
-            <li>Comdey, Romantic</li>
-            <li>8 Mar, 2023</li>
-            <li>about movie Lorem ipsum dolor sit, amet consectetur adipisicing. Lorem ipsum dolor, sit amet consectetur adipisicing.</li>
+            <li>timezone: {singleData.show.network.country.timezone}</li>
+            <li>Time: {singleData.show.schedule.time}, {singleData.show.schedule?.days}</li>
+            <li>Type: {singleData.show.type}</li>
+            <li>country: {singleData.show.network.country.name}</li>
+            <li>Genres: {singleData.show.genres[0]} {singleData.show.genres[1]} </li>
+            <li>language: {singleData.show.language}</li>
+            <li>premiered: {singleData.show.premiered}</li>
         </ul>
 <button type="button" class="tickets-btn btn btn-lg btn-danger" onClick={e => naviagte("/book-tickets")}>Book Tickets</button>
     </div>
-
 </div>
 </div>
 
+      </div>
+
+      <div className='container second-section'>
+<h2 className='bold'>About the movie</h2>
+<p className='about'>{singleData.show.summary}</p>
+<hr />
       </div>
   </>
 }

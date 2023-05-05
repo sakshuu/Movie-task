@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "swiper/css/effect-coverflow";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination,Autoplay, Navigation } from "swiper";
@@ -7,10 +7,21 @@ import "swiper/css/navigation";
 import 'swiper/css/scrollbar';
 import "swiper/css";
 import "./../assets/css/details.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { movieListShow } from '../redux/action/movieAction';
 
 const MySwiper = () => {
+
+
+  const actionDispatch = useDispatch()
+  const {movieList} = useSelector(state => state.allMovie)
+
+  useEffect(() => {
+    actionDispatch(movieListShow())
+  }, [])
+
   return <>
-  <div className="container">
+  <div className="container footer-section">
 
   <div >
 
@@ -38,39 +49,21 @@ const MySwiper = () => {
      modifier: 1,
      slideShadows: true,
     }}
-    // centeredSlides={true}
-    // pagination={true}
-    // modules={[EffectCoverflow, Pagination]}
    className="mySwiper "
  >
-   <SwiperSlide>
+  {
+    movieList.map(item =>  <>
+   <SwiperSlide> 
        <div class="card">
-       <img src="https://m.media-amazon.com/images/M/MV5BMmJjNGM0MDAtYjBkNy00YWYyLWJkNGUtZTQyNjBlMzNhZDM2XkEyXkFqcGdeQXVyMTEwOTUyOTg5._V1_QL75_UX380_CR0,4,380,562_.jpg" />
-       <div className='swiper-footer'>
-       <h5>sakshi jadhav</h5>
-       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit.</p>
+       <img src={item.show.image?.original} />
+       <div class="card-footers ">
+      <small class="text-muted"><i class="bi b-colour bi-star-fill"></i> {item.show.rating.average}</small>
+    </div>
        </div>
-       </div>
-   </SwiperSlide>
-   <SwiperSlide>
-       <div class="card">
-       <img src="https://m.media-amazon.com/images/M/MV5BMmJjNGM0MDAtYjBkNy00YWYyLWJkNGUtZTQyNjBlMzNhZDM2XkEyXkFqcGdeQXVyMTEwOTUyOTg5._V1_QL75_UX380_CR0,4,380,562_.jpg" />
-       <div className='footer-swiper'><h1>sakshi jadhav</h1></div>
-       </div>
-   </SwiperSlide>
-   <SwiperSlide>
-       <div class="card">
-       <img src="https://m.media-amazon.com/images/M/MV5BMmJjNGM0MDAtYjBkNy00YWYyLWJkNGUtZTQyNjBlMzNhZDM2XkEyXkFqcGdeQXVyMTEwOTUyOTg5._V1_QL75_UX380_CR0,4,380,562_.jpg" />
-       <div className='footer-swiper'><h1>sakshi jadhav</h1></div>
-       </div>
-   </SwiperSlide>
-   <SwiperSlide>
-       <div class="card">
-       <img src="https://m.media-amazon.com/images/M/MV5BMmJjNGM0MDAtYjBkNy00YWYyLWJkNGUtZTQyNjBlMzNhZDM2XkEyXkFqcGdeQXVyMTEwOTUyOTg5._V1_QL75_UX380_CR0,4,380,562_.jpg" />
-       <div className='footer-swiper'><h1>sakshi jadhav</h1></div>
-       </div>
-   </SwiperSlide>
-   
+   </SwiperSlide>  
+    </>
+      )
+  }
  </Swiper>
      </div>
     </div>

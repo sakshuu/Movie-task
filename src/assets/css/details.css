@@ -8,10 +8,9 @@
 }
 .moviedetails{
   display: flex;
-  align-items: flex-start;
-  margin:5%;
-}
-
+    align-items: flex-start;
+    margin:5%;
+  }
 .cinemas-footer{
    font-size: 12px;
   text-align: center;
@@ -42,13 +41,11 @@
   font-weight: bold;
 }
 .language-d{
-  /* font-size: 16px; */
   padding: 10px;
   background-color:#D3D3D3;
   width: 7vmin;
 }
 .language{
-  /* font-size: 16px; */
   padding: 10px;
   width: 29vmin;
   background-color:#D3D3D3;
@@ -60,12 +57,20 @@ padding-top: 60px;
   list-style-type: circle;
 }
 .tickets-btn{
-  /* padding: 10px; */
-  /* padding-left: 3px; */
-  /* padding-right: 3px; */
   border-radius: 30px;
   font-size: 15px;
 }
+.second-section{
+  margin-top: 35px;
+}
+.about{
+   padding: 10px;
+}
+.footer-section{
+  margin-bottom:  35px;
+}
+
+
 
 
 /* swiper */
